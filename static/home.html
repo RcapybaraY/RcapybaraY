@@ -1,10 +1,84 @@
 <html>
 <header>
-    <title></title>
+    <title>micetery_ home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            background-color: peachpuff;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            background-color: FloralWhite;
+            color: #374048;
+            border-radius: 15vw 15vw 0 0;
+            margin-top: 5vh;
+            margin-bottom: 0;
+            box-shadow: 0 0 10px 10px #edbf92;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            * {
+                background-color: slategray;
+            }
+
+            .container {
+                background-color: #374048;
+                color: FloralWhite;
+                box-shadow: 0 0 10px 10px #4e5b65;
+            }
+
+            .grid-container>img {
+                filter: invert(100%);
+            }
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                'header header header header header header'
+                'menu main main main main right'
+                'footer footer footer footer footer footer';
+            background-color: transparent;
+            gap: 10px;
+            padding: 5vw;
+        }
+
+        .grid-container>div,
+        img {
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .sticky-top {
+            position: sticky;
+            top: 0;
+        }
+
+        .sticky-bottom {
+            position: sticky;
+            bottom: 0;
+        }
+    </style>
 </header>
 
 <body>
-    <p>Hello world</p>
+    <div class="container">
+        <div class="grid-container">
+            <div>Work in progress</div>
+            <img src="./assets/Loading.gif" width="200vw">
+        </div>
+    </div>
 </body>
 
 </html>
