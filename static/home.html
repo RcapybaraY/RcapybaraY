@@ -140,6 +140,18 @@
             transition: transform 0.3s ease;
         }
 
+        .inner-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-areas:
+                "avatar title"
+                "avatar text";
+            column-gap: .75rem;
+            row-gap: .25rem;
+            align-items: center;
+        }
+
+
         /* Tablet layout */
         @media (max-width: 900px) {
             .grid-container {
@@ -196,6 +208,16 @@
                 font-size: 1.5rem;
                 transition: transform 0.3s ease;
             }
+
+            .inner-grid {
+                grid-template-areas:
+                    "avatar title"
+                    "text   text";
+            }
+
+            .greeting2 {
+                padding-left: 1rem;
+            }
         }
 
         /* Grid areas mapping */
@@ -231,6 +253,18 @@
             grid-area: footer;
         }
 
+        .avatar-space {
+            grid-area: avatar;
+        }
+
+        .greeting {
+            grid-area: title;
+        }
+
+        .greeting2 {
+            grid-area: text;
+        }
+
         /* card style */
         .card {
             display: flex;
@@ -252,6 +286,10 @@
             width: clamp(5rem, 10vw, 8rem);
             height: clamp(5rem, 10vw, 8rem);
             margin: .5rem;
+        }
+
+        aside>div {
+            margin: 1rem;
         }
 
         .svg-layer {
@@ -339,8 +377,8 @@
     <div class="container">
         <!-- work in progress cover -->
         <div class="fix-front"
-            style="position: relative; animation: fadeIn 1s ease-in-out forwards; padding: 1rem; background-color: var(--bg-2); border:1rem solid var(--shadow-color); border-radius:2.5rem; text-align:center; top: 50%; left: 50%;">
-            <div style="background-color: transparent;">
+            style="display:block;animation: fadeIn 1s ease-in-out forwards; padding: 1rem; background-color: var(--bg-2); border:1rem solid var(--shadow-color); border-radius:2.5rem; text-align:center; top: 50%; left: 50%;">
+            <div style="background-color: transparent;width:fit-content">
                 <i class="fa-solid fa-hammer fa-1x" style="background-color: transparent;"></i>
                 This page is still work in progress
                 <i class="fa-solid fa-screwdriver-wrench fa-1x" style="background-color: transparent;"></i>
@@ -360,13 +398,18 @@
                 </div>
             </section>
 
+            <!-- intro -->
             <main class="main card reveal" style="--reveal-order: 0;">
-                <span>
-                    <img src="./assets/maus_avatar.png" class="avatar">
-                </span>
-                <div>
-                    <h2 style="padding-bottom: .5rem;">Hi! I'm micetery o/</h2>
-                    <p>Welcome to my website, feel free to check what I can do :D</p>
+                <div class="inner-grid">
+                    <span class="avatar-space">
+                        <img src="./assets/maus_avatar.png" class="avatar">
+                    </span>
+                    <span class="greeting">
+                        <h2>Hi! I'm micetery o/</h2>
+                    </span>
+                    <span class="greeting2">
+                        <p>Welcome to my website, feel free to check what I can do :D</p>
+                    </span>
                 </div>
             </main>
 
@@ -392,7 +435,7 @@
         </div>
 
         <!-- svg background -->
-        <div class="svg-layer">
+        <!-- <div class="svg-layer">
             <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" style="background-color: transparent;">
                 <path id="motionPath" d="M50,250 C150,50 350,450 450,250" fill="none" />
                 <circle r="10" fill="tomato">
@@ -401,7 +444,7 @@
                     </animateMotion>
                 </circle>
             </svg>
-        </div>
+        </div> -->
     </div>
 
     <script src="./js/home.js">window.onscroll = function () { scrollFunction() };</script>
