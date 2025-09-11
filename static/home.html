@@ -1,63 +1,274 @@
-<html>
-<header>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <title>micetery_ home page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <style>
+        /* Default to light theme */
+        :root {
+            --bg-1: peachpuff;
+            --bg-2: FloralWhite;
+            --text-color: #374048;
+            --shadow-color: #edbf92;
+            --border-color: peachpuff;
+        }
+
+        /* Dark theme overrides */
+        [data-theme="dark"] {
+            --bg-1: slategray;
+            --bg-2: #374048;
+            --text-color: FloralWhite;
+            --shadow-color: #4e5b65;
+            --border-color: slategray;
+        }
+
+        .invert {
+            filter: invert(100%);
+        }
+
         * {
             margin: 0;
             box-sizing: border-box;
-            background-color: peachpuff;
+            background-color: var(--bg-1);
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
         }
 
         body {
+            font-family: Arial, Helvetica, sans-serif;
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
         }
 
+        header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            background-color: transparent;
+            z-index: 3;
+        }
+
+        header>nav {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            background-color: transparent;
+        }
+
+        .navbar {
+            background-color: var(--bg-2);
+            list-style: none;
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            box-shadow: 0 0 5px 5px var(--shadow-color);
+            border-radius: 1.25rem;
+            padding: .5rem .75rem;
+            margin-top: 1rem;
+        }
+
+        .navbar>li {
+            padding: .5rem;
+            border: 0.1rem solid transparent;
+            border-radius: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .navbar>li,
+        a {
+            background-color: inherit;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        li:hover {
+            border-color: var(--border-color);
+            cursor: pointer;
+        }
+
+        #theme-toggle {
+            align-self: center;
+            padding-top: 0.15rem;
+            border-radius: .75rem;
+            height: 75%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            background-color: var(--shadow-color);
+            border-color: var(--bg-2);
+            color: var(--text-color);
+        }
+
+        #theme-toggle:hover {
+            border-color: var(--border-color);
+            cursor: pointer;
+        }
+
         .container {
             flex: 1;
-            background-color: FloralWhite;
-            color: #374048;
-            border-radius: 15vw 15vw 0 0;
-            margin-top: 5vh;
+            background-color: var(--bg-2);
+            color: var(--text-color);
+            border-radius: 5rem 5rem 0 0;
+            margin-top: 1rem;
             margin-bottom: 0;
-            box-shadow: 0 0 10px 10px #edbf92;
+            box-shadow: 0 0 7px 7px var(--shadow-color);
         }
 
-        @media (prefers-color-scheme: dark) {
-            * {
-                background-color: slategray;
-            }
-
-            .container {
-                background-color: #374048;
-                color: FloralWhite;
-                box-shadow: 0 0 10px 10px #4e5b65;
-            }
-
-            .grid-container>img {
-                filter: invert(100%);
-            }
-        }
-
+        /* PC layout */
         .grid-container {
-            display: grid;
-            grid-template-areas:
-                'header header header header header header'
-                'menu main main main main right'
-                'footer footer footer footer footer footer';
+            z-index: 1;
+            position: relative;
             background-color: transparent;
-            gap: 10px;
-            padding: 5vw;
+            gap: 1rem;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas:
+                "sidebarL sub sidebarR"
+                "sidebarL main sidebarR"
+                "footer footer footer";
         }
 
-        .grid-container>div,
-        img {
-            padding: 10px;
+        i {
+            font-size: 2.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Tablet layout */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: auto 1fr 1fr;
+                grid-template-areas:
+                    "sub main sidebarR"
+                    "sidebarL sidebarL sidebarR"
+                    "footer footer footer";
+            }
+
+            /* Vertical sub next to main */
+            .sub {
+                justify-self: end;
+                align-self: start;
+                text-orientation: mixed;
+            }
+
+            .sub>div {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            i {
+                font-size: 2rem;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        /* Mobile layout */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    "main sub"
+                    "sidebarL sidebarL"
+                    "sidebarR sidebarR"
+                    "footer footer";
+                align-items: start;
+            }
+
+            /* Vertical sub next to main */
+            .sub {
+                justify-self: end;
+                align-self: start;
+                text-orientation: mixed;
+            }
+
+            .sub>div {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            i {
+                font-size: 1.5rem;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        /* Grid areas mapping */
+        .main {
+            grid-area: main;
+            align-items: center;
+        }
+
+        .sub {
+            grid-area: sub;
+            justify-content: center;
+            justify-self: center;
+            align-self: start;
+            width: max-content;
+            max-width: 100%;
+        }
+
+        .sub>div {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sidebarL {
+            grid-area: sidebarL;
+        }
+
+        .sidebarR {
+            grid-area: sidebarR;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+
+        /* card style */
+        .card {
+            display: flex;
+            border-radius: 1rem;
+            padding: .5rem;
+            background-color: var(--bg-2);
+            box-shadow: inset 0 0 .3rem .3rem var(--shadow-color);
+        }
+
+        .card * {
             background-color: transparent;
+        }
+
+        /* special style */
+        .avatar {
+            border: 0.5rem solid var(--shadow-color);
+            border-radius: 50%;
+            object-fit: cover;
+            width: clamp(5rem, 10vw, 8rem);
+            height: clamp(5rem, 10vw, 8rem);
+            margin: .5rem;
+        }
+
+        .svg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        .fix-front {
+            position: absolute;
+            z-index: 2;
         }
 
         .sticky-top {
@@ -69,16 +280,132 @@
             position: sticky;
             bottom: 0;
         }
+
+        i:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            animation: appear .8s ease-in-out forwards;
+            animation-delay: calc(var(--reveal-order, 0) * 240ms);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                animation: none;
+                opacity: 1;
+            }
+        }
     </style>
-</header>
+</head>
 
 <body>
+    <!-- navbar -->
+    <header class="sticky-top">
+        <nav>
+            <ul class="navbar">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <button id="theme-toggle">
+                    ◐
+                </button>
+            </ul>
+        </nav>
+    </header>
     <div class="container">
+        <!-- work in progress cover -->
+        <div class="fix-front"
+            style="position: relative; animation: fadeIn 1s ease-in-out forwards; padding: 1rem; background-color: var(--bg-2); border:1rem solid var(--shadow-color); border-radius:2.5rem; text-align:center; top: 50%; left: 50%;">
+            <div style="background-color: transparent;">
+                <i class="fa-solid fa-hammer fa-1x" style="background-color: transparent;"></i>
+                This page is still work in progress
+                <i class="fa-solid fa-screwdriver-wrench fa-1x" style="background-color: transparent;"></i>
+            </div>
+            <img id="loading" alt="loading" src="./assets/loading.gif" width="200vw"
+                style="background-color: transparent;">
+        </div>
+        <!-- main layout -->
         <div class="grid-container">
-            <div>Work in progress</div>
-            <img src="./assets/loading.gif" width="200vw">
+
+            <!-- social media list -->
+            <section class="sub card reveal" style="--reveal-order: 1;">
+                <div>
+                    <a href="https://github.com/RcapybaraY"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://twitter.com/micetery_"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/micetery_/"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </section>
+
+            <main class="main card reveal" style="--reveal-order: 0;">
+                <span>
+                    <img src="./assets/maus_avatar.png" class="avatar">
+                </span>
+                <div>
+                    <h2 style="padding-bottom: .5rem;">Hi! I'm micetery o/</h2>
+                    <p>Welcome to my website, feel free to check what I can do :D</p>
+                </div>
+            </main>
+
+            <!-- sidebar 1 for technology-->
+            <aside class="sidebarL card reveal" style="--reveal-order: 2;">
+                <div>
+                    <h3>What I know:</h3>
+                </div>
+            </aside>
+
+            <!-- sidebar 2 for about me -->
+            <aside class="sidebarR card reveal" style="--reveal-order: 3;">
+                <div>
+                    <h3>About me</h3>
+                    <p>Links, notes, or anything you'd like here.</p>
+                </div>
+            </aside>
+
+            <!-- footer -->
+            <section class="footer card reveal" style="--reveal-order: 4;">
+                <p>© <span id="year"></span> micetery_ All rights reserved.</p>
+            </section>
+        </div>
+
+        <!-- svg background -->
+        <div class="svg-layer">
+            <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" style="background-color: transparent;">
+                <path id="motionPath" d="M50,250 C150,50 350,450 450,250" fill="none" />
+                <circle r="10" fill="tomato">
+                    <animateMotion dur="5s" repeatCount="indefinite">
+                        <mpath href="#motionPath" />
+                    </animateMotion>
+                </circle>
+            </svg>
         </div>
     </div>
+
+    <script src="./js/home.js">window.onscroll = function () { scrollFunction() };</script>
+
 </body>
 
 </html>
