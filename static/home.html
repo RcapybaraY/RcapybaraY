@@ -10,7 +10,8 @@
         :root {
             --bg-1: peachpuff;
             --bg-2: FloralWhite;
-            --text-color: #374048;
+            --text-color-1: #4e5b65;
+            --text-color-2: #374048;
             --shadow-color: #edbf92;
             --border-color: peachpuff;
         }
@@ -19,7 +20,8 @@
         [data-theme="dark"] {
             --bg-1: slategray;
             --bg-2: #374048;
-            --text-color: FloralWhite;
+            --text-color-1: peachpuff;
+            --text-color-2: FloralWhite;
             --shadow-color: #4e5b65;
             --border-color: slategray;
         }
@@ -40,7 +42,7 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Special Elite', monospace;
             height: 100%;
             margin: 0;
             display: flex;
@@ -84,7 +86,7 @@
         .navbar>li,
         a {
             background-color: inherit;
-            color: var(--text-color);
+            color: var(--text-color-2);
             text-decoration: none;
         }
 
@@ -102,7 +104,7 @@
             object-fit: cover;
             background-color: var(--shadow-color);
             border-color: var(--bg-2);
-            color: var(--text-color);
+            color: var(--text-color-2);
         }
 
         #theme-toggle:hover {
@@ -113,11 +115,13 @@
         .container {
             flex: 1;
             background-color: var(--bg-2);
-            color: var(--text-color);
+            color: var(--text-color-2);
             border-radius: 5rem 5rem 0 0;
             margin-top: 1rem;
             margin-bottom: 0;
             box-shadow: 0 0 7px 7px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
         }
 
         /* PC layout */
@@ -128,16 +132,67 @@
             gap: 1rem;
             padding: 2.5rem;
             display: grid;
+            flex: 1 0 auto;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-areas:
                 "sidebarL sub sidebarR"
                 "sidebarL main sidebarR"
-                "footer footer footer";
+                "sidebarL quote sidebarR";
+        }
+
+        /* Grid areas mapping */
+        .main {
+            grid-area: main;
+            align-items: center;
+            --reveal-order: 0;
+        }
+
+        .sub {
+            grid-area: sub;
+            justify-content: center;
+            justify-self: center;
+            align-self: start;
+            width: max-content;
+            max-width: 100%;
+            --reveal-order: 1;
+        }
+
+        .sub>div {
+            padding: .5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         i {
             font-size: 2.5rem;
             transition: transform 0.3s ease;
+        }
+
+        .sidebarL {
+            grid-area: sidebarL;
+            --reveal-order: 2;
+        }
+
+        .sidebarR {
+            grid-area: sidebarR;
+            --reveal-order: 3;
+        }
+
+        .quote {
+            grid-area: quote;
+            text-align: center;
+        }
+
+        .projects {
+            grid-column: 1/-1;
+        }
+
+        .footer {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: auto;
+            /* stick to bottom when content is short */
         }
 
         .inner-grid {
@@ -151,6 +206,19 @@
             align-items: center;
         }
 
+        .avatar-space {
+            grid-area: avatar;
+            overflow: hidden;
+        }
+
+        .greeting {
+            grid-area: title;
+        }
+
+        .greeting2 {
+            grid-area: text;
+            align-self: start;
+        }
 
         /* Tablet layout */
         @media (max-width: 900px) {
@@ -158,8 +226,7 @@
                 grid-template-columns: auto 1fr 1fr;
                 grid-template-areas:
                     "sub main sidebarR"
-                    "sidebarL sidebarL sidebarR"
-                    "footer footer footer";
+                    "sidebarL sidebarL sidebarR";
             }
 
             /* Vertical sub next to main */
@@ -170,6 +237,7 @@
             }
 
             .sub>div {
+                padding: .25rem;
                 flex-direction: column;
                 gap: .5rem;
             }
@@ -177,6 +245,17 @@
             i {
                 font-size: 2rem;
                 transition: transform 0.3s ease;
+            }
+
+            .quote {
+                grid-row: 3;
+                grid-column: 1 / -1;
+                text-align: left;
+            }
+
+            .projects {
+                grid-row: 4;
+                grid-column: 1 / -1;
             }
         }
 
@@ -186,9 +265,8 @@
                 grid-template-columns: 1fr auto;
                 grid-template-areas:
                     "main sub"
-                    "sidebarL sidebarL"
                     "sidebarR sidebarR"
-                    "footer footer";
+                    "sidebarL sidebarL";
                 align-items: start;
             }
 
@@ -200,6 +278,7 @@
             }
 
             .sub>div {
+                padding: 0rem;
                 flex-direction: column;
                 gap: .5rem;
             }
@@ -207,6 +286,14 @@
             i {
                 font-size: 1.5rem;
                 transition: transform 0.3s ease;
+            }
+
+            .sidebarL {
+                --reveal-order: 3;
+            }
+
+            .sidebarR {
+                --reveal-order: 2;
             }
 
             .inner-grid {
@@ -217,52 +304,25 @@
 
             .greeting2 {
                 padding-left: 1rem;
+                padding-bottom: .5rem;
             }
-        }
 
-        /* Grid areas mapping */
-        .main {
-            grid-area: main;
-            align-items: center;
-        }
+            .quote {
+                grid-row: 4;
+                grid-column: 1 / -1;
+                text-align: left;
+            }
 
-        .sub {
-            grid-area: sub;
-            justify-content: center;
-            justify-self: center;
-            align-self: start;
-            width: max-content;
-            max-width: 100%;
-        }
+            .projects {
+                grid-row: 5;
+                grid-column: 1 / -1;
+            }
 
-        .sub>div {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .sidebarL {
-            grid-area: sidebarL;
-        }
-
-        .sidebarR {
-            grid-area: sidebarR;
-        }
-
-        .footer {
-            grid-area: footer;
-        }
-
-        .avatar-space {
-            grid-area: avatar;
-        }
-
-        .greeting {
-            grid-area: title;
-        }
-
-        .greeting2 {
-            grid-area: text;
+            .footer {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
         }
 
         /* card style */
@@ -285,11 +345,19 @@
             object-fit: cover;
             width: clamp(5rem, 10vw, 8rem);
             height: clamp(5rem, 10vw, 8rem);
-            margin: .5rem;
+            margin: .5rem 0rem 0rem .5rem;
         }
 
-        aside>div {
+        aside>div,
+        .quote>div,
+        .projects>div {
             margin: 1rem;
+        }
+
+        h2,
+        h3 {
+            padding-bottom: .5rem;
+            color: var(--text-color-1);
         }
 
         .svg-layer {
@@ -312,11 +380,6 @@
         .sticky-top {
             position: sticky;
             top: 0;
-        }
-
-        .sticky-bottom {
-            position: sticky;
-            bottom: 0;
         }
 
         i:hover {
@@ -348,7 +411,7 @@
         .reveal {
             opacity: 0;
             animation: appear .8s ease-in-out forwards;
-            animation-delay: calc(var(--reveal-order, 0) * 240ms);
+            animation-delay: calc(var(--reveal-order, 0) * 150ms);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -390,50 +453,84 @@
         <div class="grid-container">
 
             <!-- social media list -->
-            <section class="sub card reveal" style="--reveal-order: 1;">
+            <section class="sub card reveal">
                 <div>
                     <a href="https://github.com/RcapybaraY"><i class="fa-brands fa-github"></i></a>
                     <a href="https://twitter.com/micetery_"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="https://www.instagram.com/micetery_/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/yan-nok-ruby-leung-071212384/">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
                 </div>
             </section>
 
             <!-- intro -->
-            <main class="main card reveal" style="--reveal-order: 0;">
+            <main class="main card reveal">
                 <div class="inner-grid">
                     <span class="avatar-space">
                         <img src="./assets/maus_avatar.png" class="avatar">
                     </span>
                     <span class="greeting">
-                        <h2>Hi! I'm micetery o/</h2>
+                        <h2>micetery<wbr><span style="white-space: nowrap;">_( C-></span></h2>
                     </span>
                     <span class="greeting2">
-                        <p>Welcome to my website, feel free to check what I can do :D</p>
+                        <p>#Full-Stack Developer</p>
+                        <p>#UI/UX Designer</p>
+                        <p>#Game Developer</p>
                     </span>
                 </div>
             </main>
 
             <!-- sidebar 1 for technology-->
-            <aside class="sidebarL card reveal" style="--reveal-order: 2;">
+            <aside class="sidebarL card reveal">
                 <div>
-                    <h3>What I know:</h3>
+                    <h3>Skill set:</h3>
+                    <p>HTML CSS Bootstrap JavaScript NodeJS Express MongoDB </p>
+                    <p>Python Java C#</p>
                 </div>
             </aside>
 
             <!-- sidebar 2 for about me -->
-            <aside class="sidebarR card reveal" style="--reveal-order: 3;">
+            <aside class=" sidebarR card reveal">
                 <div>
                     <h3>About me</h3>
-                    <p>Links, notes, or anything you'd like here.</p>
+                    <p>
+                        I am a programmer with a passion for both web and game development,
+                        where I enjoy exploring new technologies and create engaging digital experiences.
+                        <span style="display: block; padding-bottom: 0.3rem;"></span>
+                        As I always eager for a challenge, feel free to contact me if you have a
+                        project in mind :)
+                    </p>
                 </div>
             </aside>
 
-            <!-- footer -->
-            <section class="footer card reveal" style="--reveal-order: 4;">
-                <p>© <span id="year"></span> micetery_ All rights reserved.</p>
+            <section class="quote card reveal" style="--reveal-order: 4;">
+                <div>
+                    <h3>Quote</h3>
+                    <p>
+                        "And one day, we'll look back at where we started and be amazed by
+                        how far we've come."
+                        — Technoblade
+                    </p>
+                </div>
             </section>
+
+            <section class="projects card reveal" style="--reveal-order: 5;">
+                <div>
+                    // display recent projects here
+                </div>
+                <div>
+                    explore more →
+                </div>
+            </section>
+
         </div>
 
+        <!-- footer -->
+        <section class="footer card" style="border-radius: 1rem 1rem 0 0;">
+            <p style="margin-left:1rem;">micetery_ © <span id="year"></span> - Privacy Policy</p>
+            <p style="margin-right:1rem;">Hong Kong</p>
+        </section>
         <!-- svg background -->
         <!-- <div class="svg-layer">
             <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" style="background-color: transparent;">
