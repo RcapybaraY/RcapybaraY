@@ -78,7 +78,7 @@
 
         .navbar>li {
             padding: .5rem;
-            border: 0.1rem solid transparent;
+            border: 0.15rem solid transparent;
             border-radius: 1rem;
             transition: border-color 0.3s ease;
         }
@@ -92,11 +92,13 @@
 
         li:hover {
             border-color: var(--border-color);
+            transform: scale(1.1);
             cursor: pointer;
         }
 
         #theme-toggle {
             align-self: center;
+            font-size: 1.1rem;
             padding-top: 0.15rem;
             border-radius: .75rem;
             height: 75%;
@@ -105,10 +107,12 @@
             background-color: var(--shadow-color);
             border-color: var(--bg-2);
             color: var(--text-color-2);
+            transition: border-color 0.3s ease;
         }
 
         #theme-toggle:hover {
             border-color: var(--border-color);
+            transform: scale(1.2);
             cursor: pointer;
         }
 
