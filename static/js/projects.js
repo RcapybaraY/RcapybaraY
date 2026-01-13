@@ -35,7 +35,7 @@ fetch("./assets/projects.json")
     .then(response => response.json())
     .then(data => {
         data.sort((a, b) => new Date(b.updated) - new Date(a.updated));
-        const recent = data.slice(0, 3);
+        const recent = data;
         let html = `<h3> Recent Projects </h3>`;
         for (let project of recent) {
 

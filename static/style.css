@@ -144,6 +144,7 @@ li:hover {
 .main {
     grid-area: main;
     align-items: center;
+    justify-content: center;
     --reveal-order: 0;
 }
 
@@ -187,6 +188,13 @@ i {
 
 .projects {
     grid-column: 1/-1;
+    justify-content: space-between;
+}
+
+.explore {
+    text-align: right;
+    margin-top: auto;
+    align-self: end;
 }
 
 .footer {
@@ -359,11 +367,11 @@ i {
 
 /* special style */
 .avatar {
-    border: 0.5rem solid var(--shadow-color);
+    border: clamp(0.35rem, 1vw, 0.75rem) solid var(--shadow-color);
     border-radius: 50%;
     object-fit: cover;
-    width: clamp(5rem, 10vw, 8rem);
-    height: clamp(5rem, 10vw, 8rem);
+    width: clamp(4rem, 10vw, 8rem);
+    height: clamp(4rem, 10vw, 8rem);
     margin: .5rem 0rem 0rem .5rem;
 }
 
@@ -398,8 +406,8 @@ h3 {
 }
 
 .fix-front {
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 3;
 }
 
 .sticky-top {

@@ -14,28 +14,12 @@
     <!-- navbar -->
     <header class="sticky-top">
         <nav>
-            <ul class="navbar">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <button id="theme-toggle">
-                    ◐
-                </button>
-            </ul>
+            <ul class="navbar"></ul>
         </nav>
     </header>
     <div class="container">
         <!-- work in progress cover -->
-        <div class="fix-front"
-            style="display:none;animation: fadeIn 1s ease-in-out forwards; padding: 1rem; background-color: var(--bg-2); border:1rem solid var(--shadow-color); border-radius:2.5rem; text-align:center; top: 50%; left: 50%;">
-            <div style="background-color: transparent;width:fit-content">
-                <i class="fa-solid fa-hammer fa-1x" style="background-color: transparent;"></i>
-                This page is still work in progress
-                <i class="fa-solid fa-screwdriver-wrench fa-1x" style="background-color: transparent;"></i>
-            </div>
-            <img id="loading" alt="loading" src="./assets/loading.gif" width="200vw"
-                style="background-color: transparent;">
-        </div>
+        <div id="cover"></div>
         <!-- main layout -->
         <div class="grid-container">
 
@@ -117,11 +101,11 @@
             </section>
 
             <section class="projects card reveal" style="--reveal-order: 5;">
-                <div>
+                <div id="projects">
                     // display recent projects here
                 </div>
-                <div>
-                    <a href="#">explore more →</a>
+                <div class="explore">
+                    <a href="./projects.html" style="white-space:nowrap;">more →</a>
                 </div>
             </section>
 
@@ -145,8 +129,9 @@
         </div> -->
     </div>
 
+    <script src="./js/loading.js">window.onscroll = function () { scrollFunction() };</script>
+    <script src="./js/navbar.js">window.onscroll = function () { scrollFunction() };</script>
     <script src="./js/home.js">window.onscroll = function () { scrollFunction() };</script>
-
 </body>
 
 </html>
