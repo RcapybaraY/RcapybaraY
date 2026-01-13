@@ -30,3 +30,4 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     applyTheme(current === 'dark' ? 'light' : 'dark');
 });
+

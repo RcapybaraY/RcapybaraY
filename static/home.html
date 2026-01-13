@@ -6,424 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <style>
-        /* Default to light theme */
-        :root {
-            --bg-1: peachpuff;
-            --bg-2: FloralWhite;
-            --text-color-1: #4e5b65;
-            --text-color-2: #374048;
-            --shadow-color: #edbf92;
-            --border-color: peachpuff;
-        }
-
-        /* Dark theme overrides */
-        [data-theme="dark"] {
-            --bg-1: slategray;
-            --bg-2: #374048;
-            --text-color-1: peachpuff;
-            --text-color-2: FloralWhite;
-            --shadow-color: #4e5b65;
-            --border-color: slategray;
-        }
-
-        .invert {
-            filter: invert(100%);
-        }
-
-        * {
-            margin: 0;
-            box-sizing: border-box;
-            background-color: var(--bg-1);
-        }
-
-        html {
-            height: 100%;
-            margin: 0;
-        }
-
-        body {
-            font-family: 'Special Elite', monospace;
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            background-color: transparent;
-            z-index: 3;
-        }
-
-        header>nav {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            background-color: transparent;
-        }
-
-        .navbar {
-            background-color: var(--bg-2);
-            list-style: none;
-            display: flex;
-            gap: .5rem;
-            justify-content: center;
-            box-shadow: 0 0 5px 5px var(--shadow-color);
-            border-radius: 1.25rem;
-            padding: .5rem .75rem;
-            margin-top: 1rem;
-        }
-
-        .navbar>li {
-            padding: .5rem;
-            border: 0.15rem solid transparent;
-            border-radius: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .navbar>li,
-        a {
-            background-color: inherit;
-            color: var(--text-color-2);
-            text-decoration: none;
-        }
-
-        li:hover {
-            border-color: var(--border-color);
-            transform: scale(1.1);
-            cursor: pointer;
-        }
-
-        #theme-toggle {
-            align-self: center;
-            font-size: 1.1rem;
-            padding-top: 0.15rem;
-            border-radius: .75rem;
-            height: 75%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            background-color: var(--shadow-color);
-            border-color: var(--bg-2);
-            color: var(--text-color-2);
-            transition: border-color 0.3s ease;
-        }
-
-        #theme-toggle:hover {
-            border-color: var(--border-color);
-            transform: scale(1.2);
-            cursor: pointer;
-        }
-
-        .container {
-            flex: 1;
-            background-color: var(--bg-2);
-            color: var(--text-color-2);
-            border-radius: 5rem 5rem 0 0;
-            margin-top: 1rem;
-            margin-bottom: 0;
-            box-shadow: 0 0 7px 7px var(--shadow-color);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* PC layout */
-        .grid-container {
-            z-index: 1;
-            position: relative;
-            background-color: transparent;
-            gap: 1rem;
-            padding: 2.5rem;
-            display: grid;
-            flex: 1 0 auto;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-areas:
-                "sidebarL sub sidebarR"
-                "sidebarL main sidebarR"
-                "sidebarL quote sidebarR";
-        }
-
-        /* Grid areas mapping */
-        .main {
-            grid-area: main;
-            align-items: center;
-            --reveal-order: 0;
-        }
-
-        .sub {
-            grid-area: sub;
-            justify-content: center;
-            justify-self: center;
-            align-self: start;
-            width: max-content;
-            max-width: 100%;
-            --reveal-order: 1;
-        }
-
-        .sub>div {
-            padding: .5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        i {
-            font-size: 2.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebarL {
-            grid-area: sidebarL;
-            --reveal-order: 2;
-        }
-
-        .sidebarR {
-            grid-area: sidebarR;
-            --reveal-order: 3;
-        }
-
-        .quote {
-            grid-area: quote;
-            text-align: center;
-        }
-
-        .projects {
-            grid-column: 1/-1;
-        }
-
-        .footer {
-            flex-direction: row;
-            justify-content: space-between;
-            margin-top: auto;
-            /* stick to bottom when content is short */
-        }
-
-        .inner-grid {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            grid-template-areas:
-                "avatar title"
-                "avatar text";
-            column-gap: .75rem;
-            row-gap: .25rem;
-            align-items: center;
-        }
-
-        .avatar-space {
-            grid-area: avatar;
-            overflow: hidden;
-        }
-
-        .greeting {
-            grid-area: title;
-        }
-
-        .greeting2 {
-            grid-area: text;
-            align-self: start;
-        }
-
-        /* Tablet layout */
-        @media (max-width: 900px) {
-            .grid-container {
-                grid-template-columns: auto 1fr 1fr;
-                grid-template-areas:
-                    "sub main sidebarR"
-                    "sidebarL sidebarL sidebarR";
-            }
-
-            /* Vertical sub next to main */
-            .sub {
-                justify-self: end;
-                align-self: start;
-                text-orientation: mixed;
-            }
-
-            .sub>div {
-                padding: .25rem;
-                flex-direction: column;
-                gap: .5rem;
-            }
-
-            i {
-                font-size: 2rem;
-                transition: transform 0.3s ease;
-            }
-
-            .quote {
-                grid-row: 3;
-                grid-column: 1 / -1;
-                text-align: left;
-            }
-
-            .projects {
-                grid-row: 4;
-                grid-column: 1 / -1;
-            }
-        }
-
-        /* Mobile layout */
-        @media (max-width: 600px) {
-            .grid-container {
-                grid-template-columns: 1fr auto;
-                grid-template-areas:
-                    "main sub"
-                    "sidebarR sidebarR"
-                    "sidebarL sidebarL";
-                align-items: start;
-            }
-
-            /* Vertical sub next to main */
-            .sub {
-                justify-self: end;
-                align-self: start;
-                text-orientation: mixed;
-            }
-
-            .sub>div {
-                padding: 0rem;
-                flex-direction: column;
-                gap: .5rem;
-            }
-
-            i {
-                font-size: 1.5rem;
-                transition: transform 0.3s ease;
-            }
-
-            .sidebarL {
-                --reveal-order: 3;
-            }
-
-            .sidebarR {
-                --reveal-order: 2;
-            }
-
-            .inner-grid {
-                grid-template-areas:
-                    "avatar title"
-                    "text   text";
-            }
-
-            .greeting2 {
-                padding-left: 1rem;
-                padding-bottom: .5rem;
-            }
-
-            .quote {
-                grid-row: 4;
-                grid-column: 1 / -1;
-                text-align: left;
-            }
-
-            .projects {
-                grid-row: 5;
-                grid-column: 1 / -1;
-            }
-
-            .footer {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-            }
-        }
-
-        /* card style */
-        .card {
-            display: flex;
-            border-radius: 1rem;
-            padding: .5rem;
-            background-color: var(--bg-2);
-            box-shadow: inset 0 0 .3rem .3rem var(--shadow-color);
-        }
-
-        .card * {
-            background-color: transparent;
-        }
-
-        /* special style */
-        .avatar {
-            border: 0.5rem solid var(--shadow-color);
-            border-radius: 50%;
-            object-fit: cover;
-            width: clamp(5rem, 10vw, 8rem);
-            height: clamp(5rem, 10vw, 8rem);
-            margin: .5rem 0rem 0rem .5rem;
-        }
-
-        aside>div,
-        .quote>div,
-        .projects>div {
-            margin: 1rem;
-        }
-
-        h2,
-        h3 {
-            padding-bottom: .5rem;
-            color: var(--text-color-1);
-        }
-
-        .svg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-            background-color: transparent;
-        }
-
-        .fix-front {
-            position: absolute;
-            z-index: 2;
-        }
-
-        .sticky-top {
-            position: sticky;
-            top: 0;
-        }
-
-        i:hover {
-            transform: scale(1.2);
-        }
-
-        @keyframes appear {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 0;
-            }
-
-            to {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-        }
-
-        .reveal {
-            opacity: 0;
-            animation: appear .8s ease-in-out forwards;
-            animation-delay: calc(var(--reveal-order, 0) * 150ms);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .reveal {
-                animation: none;
-                opacity: 1;
-            }
-        }
+        @import url('./style.css');
     </style>
 </head>
 
@@ -444,7 +27,7 @@
     <div class="container">
         <!-- work in progress cover -->
         <div class="fix-front"
-            style="display:block;animation: fadeIn 1s ease-in-out forwards; padding: 1rem; background-color: var(--bg-2); border:1rem solid var(--shadow-color); border-radius:2.5rem; text-align:center; top: 50%; left: 50%;">
+            style="display:none;animation: fadeIn 1s ease-in-out forwards; padding: 1rem; background-color: var(--bg-2); border:1rem solid var(--shadow-color); border-radius:2.5rem; text-align:center; top: 50%; left: 50%;">
             <div style="background-color: transparent;width:fit-content">
                 <i class="fa-solid fa-hammer fa-1x" style="background-color: transparent;"></i>
                 This page is still work in progress
@@ -478,9 +61,10 @@
                         <h2>micetery<wbr><span style="white-space: nowrap;">_( C-></span></h2>
                     </span>
                     <span class="greeting2">
-                        <p>#Full-Stack Developer</p>
-                        <p>#UI/UX Designer</p>
-                        <p>#Game Developer</p>
+                        <p style="color: var(--theme-4);">#Programmer</p>
+                        <p style="color: var(--theme-1);">#Full-Stack Developer</p>
+                        <p style="color: var(--theme-3);">#Game Developer</p>
+                        <p style="color: var(--theme-2);">#Visual Designer</p>
                     </span>
                 </div>
             </main>
@@ -488,22 +72,35 @@
             <!-- sidebar 1 for technology-->
             <aside class="sidebarL card reveal">
                 <div>
-                    <h3>Skill set:</h3>
-                    <p>HTML CSS Bootstrap JavaScript NodeJS Express MongoDB </p>
-                    <p>Python Java C#</p>
+                    <h3>Skill set</h3>
+                    <h4 style="color:var(--theme-1)">Web Development</h4>
+                    <p><span style="color:var(--text-color-1)">Frontend:</span> HTML, CSS, Bootstrap
+                        <br><span style="color:var(--text-color-1)">Backend:</span> JavaScript, NodeJS, Express
+                        <br><span style="color:var(--text-color-1)">Infrastructure Tools:</span> MongoDB, Git, Vercel
+                    </p>
+                    <span style="display: block; padding-bottom: 0.75rem;"></span>
+                    <h4 style="color:var(--theme-4)">Programming Languages</h4>
+                    <p>Python, Java, C#</p>
+                    <span style="display: block; padding-bottom: 0.75rem;"></span>
+                    <h4 style="color:var(--theme-3)">Game Development</h4>
+                    <p>Unity (2D, 3D, VR), Scratch</p>
                 </div>
             </aside>
 
             <!-- sidebar 2 for about me -->
-            <aside class=" sidebarR card reveal">
+            <aside class="sidebarR card reveal">
                 <div>
                     <h3>About me</h3>
                     <p>
-                        I am a programmer with a passion for both web and game development,
-                        where I enjoy exploring new technologies and create engaging digital experiences.
-                        <span style="display: block; padding-bottom: 0.3rem;"></span>
+                        I am a <span style="font-weight:bold; color:var(--theme-4)">programmer</span> with a passion for
+                        both <span style="font-weight:bold; color: var(--theme-1);">web</span> and <span
+                            style="font-weight:bold; color: var(--theme-3);">game</span> development, where I enjoy
+                        exploring new technologies and express my <span
+                            style="font-weight:bold; color:var(--theme-2)">creativities</span> through the digital world
+                        <span style="white-space:nowrap;">( •̀ ω •́ )✧</span>
+                        <span style="display: block; padding-bottom: 0.75rem;"></span>
                         As I always eager for a challenge, feel free to contact me if you have a
-                        project in mind :)
+                        project in mind <span style="white-space:nowrap;">(｡･∀･)ﾉﾞ</span>
                     </p>
                 </div>
             </aside>
@@ -514,7 +111,7 @@
                     <p>
                         "And one day, we'll look back at where we started and be amazed by
                         how far we've come."
-                        — Technoblade
+                        — <span style="font-weight:bold; color:var(--theme-3)">Technoblade</span>
                     </p>
                 </div>
             </section>
@@ -524,14 +121,14 @@
                     // display recent projects here
                 </div>
                 <div>
-                    explore more →
+                    <a href="#">explore more →</a>
                 </div>
             </section>
 
         </div>
 
         <!-- footer -->
-        <section class="footer card" style="border-radius: 1rem 1rem 0 0;">
+        <section class="footer card2">
             <p style="margin-left:1rem;">micetery_ © <span id="year"></span> - Privacy Policy</p>
             <p style="margin-right:1rem;">Hong Kong</p>
         </section>
