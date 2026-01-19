@@ -1,4 +1,4 @@
-## Hello this is my protfolio👇
+## Hello this is my portfolio👇
 https://micetery.vercel.app/
 
 <!--
