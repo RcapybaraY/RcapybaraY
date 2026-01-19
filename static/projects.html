@@ -4,10 +4,9 @@
 <head>
     <title>micetery_ projects page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/projects.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('./style.css');
-    </style>
 </head>
 
 <body>
@@ -20,17 +19,38 @@
     <div class="container">
         <div id="cover"></div>
         <div class="grid-container">
-            <section class="card reveal" style="padding: 1.5rem; --reveal-order: 1;">
-                <div id="projects">
+            <section class="projects card reveal" style="padding: 1.5rem; --reveal-order: 0;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 1rem;">
+                    <h3 style="margin: 0;">My Projects</h3>
+                    <div id="view-toggle"
+                        style="display: flex; gap: 0.5rem; background-color: var(--bg-2); padding: 0.5rem; border-radius: 0.5rem;">
+                        <button id="list-view-btn" class="view-btn active" title="List view"
+                            style="padding: 0.5rem 0.75rem; border: none; border-radius: 0.35rem; cursor: pointer; background-color: var(--theme-1); color: white; font-weight: bold;">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button id="grid-view-btn" class="view-btn" title="Grid view"
+                            style="padding: 0.5rem 0.75rem; border: none; border-radius: 0.35rem; cursor: pointer; background-color: transparent; color: var(--text-color-2);">
+                            <i class="fas fa-grip"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="projects" class="projects-list">
                     // display recent projects here
                 </div>
             </section>
         </div>
     </div>
 
-    <script src="./js/loading.js">window.onscroll = function () { scrollFunction() };</script>
-    <script src="./js/navbar.js">window.onscroll = function () { scrollFunction() };</script>
-    <script src="./js/projects.js">window.onscroll = function () { scrollFunction() };</script>
+    <script src="./js/loading.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/projects.js"></script>
+    <script>
+        window.onload = function () {
+            display(false);
+        };
+    </script>
 </body>
 
 </html>

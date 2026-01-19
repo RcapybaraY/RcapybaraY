@@ -4,10 +4,9 @@
 <head>
     <title>micetery_ home page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/home.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('./style.css');
-    </style>
 </head>
 
 <body>
@@ -129,9 +128,15 @@
         </div> -->
     </div>
 
-    <script src="./js/loading.js">window.onscroll = function () { scrollFunction() };</script>
-    <script src="./js/navbar.js">window.onscroll = function () { scrollFunction() };</script>
-    <script src="./js/home.js">window.onscroll = function () { scrollFunction() };</script>
+    <script src="./js/loading.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/home.js"></script>
+    <script>
+        window.onload = function () {
+            display(false);
+        };
+    </script>
 </body>
 
 </html>

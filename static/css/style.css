@@ -193,7 +193,8 @@ i {
 
 .explore {
     text-align: right;
-    margin-top: auto;
+    margin: 0.5rem !important;
+    margin-top: auto !important;
     align-self: end;
 }
 
@@ -329,6 +330,7 @@ i {
     .projects {
         grid-row: 5;
         grid-column: 1 / -1;
+        flex-direction: column;
     }
 
     .footer {
