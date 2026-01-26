@@ -1,5 +1,12 @@
 [
   {
+    "name": "SnowmanPOV",
+    "description": "a ball throwing game I made just for fun and learning game development with JavaScript",
+    "tag": "HTML, CSS, JS",
+    "link": "https://rcapybaray.github.io/SnowmanPOV/",
+    "updated": "Oct 15, 2025"
+  },
+  {
     "name": "RcapybaraY",
     "description": "my profile website",
     "tag": "HTML, CSS, JS",
