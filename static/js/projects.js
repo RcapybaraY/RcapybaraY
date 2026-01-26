@@ -5,8 +5,9 @@ fetch("./assets/projects.json")
     .then(data => {
         projectsData = data.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
-        // Load saved view preference
-        const savedView = localStorage.getItem('projectsView') || 'list';
+        // Force list view on mobile, otherwise load saved preference
+        const isMobile = window.innerWidth <= 600;
+        const savedView = isMobile ? 'list' : (localStorage.getItem('projectsView') || 'list');
         renderProjects(savedView);
         setActiveButton(savedView);
     })
@@ -37,7 +38,7 @@ function renderProjects(view) {
                 ${project.name}
             </a>
             <span>${project.description}</span>
-            <span style="float: right;margin-top:auto; margin-left:auto; margin-bottom:0; font-size: 0.85rem; color: var(--text-color-2);"><br>Last updated: ${new Date(project.updated).toLocaleDateString()}</span>
+            <span style="white-space:nowrap; float: right;margin-top:auto; margin-left:auto; margin-bottom:0; font-size: 0.85rem; color: var(--text-color-2);">Last updated: ${new Date(project.updated).toLocaleDateString()}</span>
         `;
         projectsContainer.appendChild(projectElement);
     }
@@ -64,16 +65,25 @@ function setActiveButton(view) {
     }
 }
 
-// Toggle buttons
-document.getElementById('list-view-btn').addEventListener('click', () => {
-    localStorage.setItem('projectsView', 'list');
-    renderProjects('list');
-    setActiveButton('list');
-});
+// Toggle buttons - only enabled on non-mobile screens
+const listBtn = document.getElementById('list-view-btn');
+const gridBtn = document.getElementById('grid-view-btn');
 
-document.getElementById('grid-view-btn').addEventListener('click', () => {
-    localStorage.setItem('projectsView', 'grid');
-    renderProjects('grid');
-    setActiveButton('grid');
-});
+if (listBtn && gridBtn) {
+    listBtn.addEventListener('click', () => {
+        if (window.innerWidth > 600) {
+            localStorage.setItem('projectsView', 'list');
+            renderProjects('list');
+            setActiveButton('list');
+        }
+    });
+
+    gridBtn.addEventListener('click', () => {
+        if (window.innerWidth > 600) {
+            localStorage.setItem('projectsView', 'grid');
+            renderProjects('grid');
+            setActiveButton('grid');
+        }
+    });
+}
 
