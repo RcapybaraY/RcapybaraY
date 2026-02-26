@@ -7,7 +7,7 @@
     --shadow-color: #edbf92;
     --border-color: peachpuff;
     --theme-1: CornflowerBlue;
-    --theme-2: MediumSeaGreen;
+    --theme-2: Orange;
     --theme-3: Tomato;
     --theme-4: MediumPurple;
 }
@@ -38,7 +38,7 @@ html {
 }
 
 body {
-    font-family: 'Special Elite', monospace;
+    font-family: 'Consolas', monospace;
     height: 100%;
     margin: 0;
     display: flex;

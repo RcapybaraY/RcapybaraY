@@ -3,21 +3,32 @@
 <html>
 
 <head>
-    <meta http-equiv="refresh" content="0; url=static/home.html" />
+    <meta http-equiv="refresh" content="1; url=static/home.html" />
     <style>
         div {
             display: flex;
             position: fixed;
-            bottom: 0;
-            right: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            flex-direction: column;
+        }
+
+        .invert {
+            filter: invert(100%);
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
         }
     </style>
 </head>
 
 <body>
-    <p>Redirecting...</p>
     <div>
         <img src="./static/assets/loading.gif" width="250vw">
+        <p style="text-align: center;">Redirecting...</p>
     </div>
 </body>
 
