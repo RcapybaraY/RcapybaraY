@@ -50,18 +50,14 @@ function setActiveButton(view) {
 
     if (view === 'grid') {
         listBtn.classList.remove('active');
+        listBtn.classList.add('deactive');
+        gridBtn.classList.remove('deactive');
         gridBtn.classList.add('active');
-        listBtn.style.backgroundColor = 'transparent';
-        listBtn.style.color = 'var(--text-color-2)';
-        gridBtn.style.backgroundColor = 'var(--theme-1)';
-        gridBtn.style.color = 'white';
     } else {
         listBtn.classList.add('active');
+        listBtn.classList.remove('deactive');
         gridBtn.classList.remove('active');
-        listBtn.style.backgroundColor = 'var(--theme-1)';
-        listBtn.style.color = 'white';
-        gridBtn.style.backgroundColor = 'transparent';
-        gridBtn.style.color = 'var(--text-color-2)';
+        gridBtn.classList.add('deactive');
     }
 }
 

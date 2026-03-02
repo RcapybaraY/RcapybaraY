@@ -17,6 +17,42 @@
     width: 100%;
 }
 
+#view-toggle {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--bg-2);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.view-btn {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    background-color: var(--bg-1);
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.active {
+    box-shadow: inset 0 0 .3rem .3rem var(--shadow-color);
+    background-color: transparent;
+    color: var(--text-color-1);
+    transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.deactive {
+    background-color: transparent;
+    color: var(--text-color-2);
+    transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.deactive:hover {
+    box-shadow: inset 0 0 .3rem .3rem var(--shadow-color);
+    color: var(--text-color-1);
+}
+
 .display-projects {
     display: block;
     border-radius: 1rem;
@@ -24,7 +60,6 @@
     background-color: var(--bg-2);
     box-shadow: inset 0 0 .3rem .3rem var(--shadow-color);
 }
-
 
 /* List view (default) */
 .projects-list {
