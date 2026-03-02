@@ -1,7 +1,7 @@
 const navItems = [
-    { name: "Home", href: "./home.html" },
-    { name: "Projects", href: "./projects.html" },
-    { name: "Contact", href: "./contact.html" }
+    { name: "Home", href: "home" },
+    { name: "Projects", href: "projects" },
+    { name: "Contact", href: "contact" }
 ];
 
 // Grab the existing <ul>
